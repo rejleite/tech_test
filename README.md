@@ -7,5 +7,7 @@ During the API part of the course, everything was written in server.js file. As 
 It is missing the security part and additional functionality.
 
 To use this API you have to install Node.js and MongoDb
+
 Download the code and uses the command "npm install --save" to install all the required modules.
 
+I have used PostMan for testing this api.
