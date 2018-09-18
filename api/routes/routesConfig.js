@@ -15,6 +15,7 @@ module.exports = function(app){
         
     app.route('/people/:id')
         .get(PeopleController.list_by_id)
-        .put(PeopleController.update_a_people);
+        .put(PeopleController.update_a_people)
+        .delete(PeopleController.delete_a_people);
 }
 

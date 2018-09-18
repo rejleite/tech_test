@@ -86,7 +86,7 @@ module.exports.list_by_id = function(req, res){
  * Access through @api {put} /people/:id
  * @returns json object according to the result of the operation
  *          If error returns {error: err}
- *          else returns the list of the objects 
+ *          else returns the record updated 
  */
 module.exports.update_a_people = function(req, res) {
     // Find a people record by id and update
@@ -99,6 +99,28 @@ module.exports.update_a_people = function(req, res) {
                     res.status(500).json({error: err});
                 } else {
                     res.status(201).json(record);
+                }
+            }
+        );
+  };
+
+/**
+ * Delete an object from People collection
+ * Access through @api {delete} /people/:id
+ * @returns json object according to the result of the operation
+ *          If error returns {error: err}
+ *          else returns the list of the objects 
+ */
+module.exports.delete_a_people = function(req, res) {
+    // Find a people record by id and update
+    People.deleteOne(
+            {_id: req.params.id},             
+            function(err, record) {
+                if(err){
+                    console.log(err);
+                    res.status(500).json({error: err});
+                } else {
+                    res.status(201).json({record: 'Record deleted.'});
                 }
             }
         );
