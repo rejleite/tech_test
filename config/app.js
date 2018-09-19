@@ -9,7 +9,10 @@
 var express = require('express'),
     validator = require('express-validator'),
     bodyParser = require('body-parser'),
-    db = require('./db');
+    db = require('./db'),
+    jwt = require('jsonwebtoken'),
+    bcryptjs = require('bcryptjs'),
+    config = require('./config');
 
 // Initialize the application
 app = express();

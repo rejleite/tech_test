@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    property_db = require('./property_db');
+
 // Connect to the MongoDb database
 mongoose.Promise = global.Promise;
 
@@ -6,8 +8,15 @@ mongoose.Promise = global.Promise;
  * Treat the db connection, case it occurs some error closes the db connection properly.
  */
 module.exports = function(){
-    // need some security here
-    mongoose.connect('mongodb://localhost:27017/peopleAPI', { useNewUrlParser: true });
+
+    mongoose.connect(property_db.url_conn.url, 
+        {
+            auth: {
+            user: property_db.url_conn.user,
+            password: property_db.url_conn.password
+            },
+            useNewUrlParser: true
+        });
     
     mongoose.connection.on('connected', function(){
         console.log('Mongoose connection is open...');
