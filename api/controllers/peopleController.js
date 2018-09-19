@@ -1,5 +1,5 @@
 /**
- * Validate and do the API operations
+ * Validate and does the API operations
  * @requires mongoose
  * 
  */ 
@@ -30,18 +30,21 @@ module.exports.insert = function(req, res){
     req.assert('name', 'Name should be informed').notEmpty();
 
     var errors = req.validationErrors();
-    if(errors)
+    if(errors){
         res.status(500).json({error: errors, people: data});
-      
+        return;
+    }
+
     var newPeople = new People(data);
 
     newPeople.save(function(err, record){
         if (err){
             console.log(err);
             res.status(500).json({error: err});
+        }{
+            res.status(201).json({id: record._id});
         }
         
-        res.status(201).json({id: record._id});
     });
 };
 
