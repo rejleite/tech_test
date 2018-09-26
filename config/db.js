@@ -1,6 +1,5 @@
-var mongoose = require('mongoose'),
-    property_db = require('./property_db');
-
+var mongoose = require('mongoose');
+    
 // Connect to the MongoDb database
 mongoose.Promise = global.Promise;
 
@@ -9,11 +8,11 @@ mongoose.Promise = global.Promise;
  */
 module.exports = function(){
 
-    mongoose.connect(property_db.url_conn.url, 
+    mongoose.connect(process.env.DB_CONN, 
         {
             auth: {
-            user: property_db.url_conn.user,
-            password: property_db.url_conn.password
+                user: process.env.USERDB,
+                password: process.env.PWDB
             },
             useNewUrlParser: true
         });

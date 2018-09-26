@@ -6,13 +6,18 @@
  *      @requires BodyParser : middleware to get information sent through post actions 
  * 
  */
+
+
 var express = require('express'),
     validator = require('express-validator'),
     bodyParser = require('body-parser'),
-    db = require('./db'),
-    jwt = require('jsonwebtoken'),
-    bcryptjs = require('bcryptjs'),
-    config = require('./config');
+    db = require('./db');
+
+require('dotenv').config();
+
+const {promisify} = require('util'),
+    authMiddleware = require('./auth');
+    
 
 // Initialize the application
 app = express();
@@ -23,6 +28,9 @@ app.use(bodyParser.json());
 
 // middleware for validations
 app.use(validator());
+
+// middleware for authentication
+app.use(authMiddleware);
 
 // load models
 var peopleModel = require('../api/models/people');  
